@@ -1,15 +1,21 @@
 const mongoose = require('mongoose');
 
 const encounterSchema = new mongoose.Schema({
-  patientId: String,
-  dateTime: Date,
-  encounterType: String,
-  vitals: {
-    bloodPressure: String,
-    temperature: String,
-    pulse: String,
-    spO2: String,
+  patientId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Patient',
+    required: true
   },
+  dateTime: {
+    type: Date,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  }
 });
 
-module.exports = mongoose.model('Encounter', encounterSchema);
+const Encounter = mongoose.model('Encounter', encounterSchema);
+
+module.exports = Encounter;
